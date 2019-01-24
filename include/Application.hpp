@@ -1,0 +1,4 @@
+/*
+Interface for running the application
+Written by Patrick Gilfillan
+*/

@@ -1,0 +1,18 @@
+project(engine)
+
+set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+
+file(GLOB_RECURSE SOURCE_FILES 
+    ${CMAKE_SOURCE_DIR}/src/*.c
+    ${CMAKE_SOURCE_DIR}/src/*.cpp)
+    
+file(GLOB_RECURSE HEADER_FILES 
+    ${CMAKE_SOURCE_DIR}/src/*.h
+    ${CMAKE_SOURCE_DIR}/src/*.hpp)
+
+find_package(OpenGL REQUIRED)
+find_package(GLM REQUIRED)
+find_package(GLFW3 REQUIRED)
+find_package(GLEW REQUIRED)
