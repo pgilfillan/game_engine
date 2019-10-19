@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.13.2)
 project(engine)
+set(CMAKE_MACOSX_RPATH 1)
 
 include_directories(include)
 file(GLOB SOURCES "src/*.cpp")
@@ -18,5 +19,6 @@ add_subdirectory(lib/glew EXCLUDE_FROM_ALL)
 target_link_libraries(main PRIVATE libglew_static)
 
 # glm
-add_subdirectory(lib/glm EXCLUDE_FROM_ALL)
-target_link_libraries(main PRIVATE glm)
+#add_subdirectory(lib/glm EXCLUDE_FROM_ALL)
+#target_link_libraries(main PRIVATE glm)
+include_directories(lib/glm)
