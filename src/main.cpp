@@ -7,11 +7,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "Headers/shaders.hpp"
-#include "Headers/texture.hpp"
-#include "Headers/util.hpp"
-#include "Headers/ModelLoading.hpp"
-#include "Headers/Camera.hpp"
+#include "shaders.hpp"
+#include "texture.hpp"
+#include "util.hpp"
+#include "ModelLoading.hpp"
+#include "Camera.hpp"
 
 GLFWwindow *window;
 
@@ -56,6 +56,9 @@ int main() {
     std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals; // Won't be used at the moment.
     bool res = loadOBJ("Models/cube.obj", vertices, uvs, normals);
+    if (!res) {
+        return 1;
+    }
 
     //Set up buffers
     GLuint vertexbuffer;

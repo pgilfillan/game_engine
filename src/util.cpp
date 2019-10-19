@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <GLFW/glfw3.h>
 
-#include "Headers/util.hpp"
+#include "util.hpp"
 
 namespace Util {
     void panic(const char *message) {

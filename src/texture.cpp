@@ -4,8 +4,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "Headers/texture.hpp"
-#include "Headers/util.hpp"
+#include "texture.hpp"
+#include "util.hpp"
 
 GLuint loadBMP(const char *imagePath) {
 

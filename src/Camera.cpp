@@ -5,7 +5,7 @@ Written by Patrick Gilfillan
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include "Headers/Camera.hpp"
+#include "Camera.hpp"
 
 Camera::Camera(const glm::vec3& pos, const glm::vec3& lookAtPoint, const glm::vec3& upVec) {
     lookAt(pos, lookAtPoint, upVec);

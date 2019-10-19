@@ -1,18 +1,22 @@
+cmake_minimum_required(VERSION 3.13.2)
 project(engine)
 
-set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
-set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
+include_directories(include)
+file(GLOB SOURCES "src/*.cpp")
+add_executable(main ${SOURCES})
 
-file(GLOB_RECURSE SOURCE_FILES 
-    ${CMAKE_SOURCE_DIR}/src/*.c
-    ${CMAKE_SOURCE_DIR}/src/*.cpp)
-    
-file(GLOB_RECURSE HEADER_FILES 
-    ${CMAKE_SOURCE_DIR}/src/*.h
-    ${CMAKE_SOURCE_DIR}/src/*.hpp)
+set_property(TARGET main PROPERTY CXX_STANDARD 11)
+target_compile_options(main PRIVATE -Wall)
 
-find_package(OpenGL REQUIRED)
-find_package(GLM REQUIRED)
-find_package(GLFW3 REQUIRED)
-find_package(GLEW REQUIRED)
+# Link libraries
+add_subdirectory(lib/glfw EXCLUDE_FROM_ALL)
+target_link_libraries(main PRIVATE glfw)
+
+# glew
+add_definitions(-DGLEW_STATIC)
+add_subdirectory(lib/glew EXCLUDE_FROM_ALL)
+target_link_libraries(main PRIVATE libglew_static)
+
+# glm
+add_subdirectory(lib/glm EXCLUDE_FROM_ALL)
+target_link_libraries(main PRIVATE glm)

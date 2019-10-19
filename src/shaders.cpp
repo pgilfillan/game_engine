@@ -3,8 +3,8 @@
 
 #include <GL/glew.h>
 
-#include "Headers/shaders.hpp"
-#include "Headers/util.hpp"
+#include "shaders.hpp"
+#include "util.hpp"
 
 char* fileToBuffer(const char* file);
 

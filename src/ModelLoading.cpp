@@ -5,7 +5,7 @@
 
 #include <glm/glm.hpp>
 
-#include "Headers/ModelLoading.hpp"
+#include "ModelLoading.hpp"
 
 // Very, VERY simple OBJ loader.
 // Here is a short list of features a real function would provide : 
