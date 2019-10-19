@@ -34,7 +34,7 @@ int main() {
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
     //Set up shaders
-    GLuint program = loadShaders("Shaders/simpleVShader.vs", "Shaders/simpleFShader.fs");
+    GLuint program = loadShaders("../res/shaders/simpleVShader.vs", "../res/shaders/simpleFShader.fs");
 
     //Initialise camera
     Camera cam = Camera(glm::vec3(7,5,3), glm::vec3(0,0,0), glm::vec3(0,1,0));
@@ -47,7 +47,7 @@ int main() {
     glm::mat4 MVP        = Projection * View * Model;
 
     //Load textures
-    GLuint firstTex = loadBMP("Textures/uvtemplate.bmp");
+    GLuint firstTex = loadBMP("../res/textures/uvtemplate.bmp");
     if (!firstTex) Util::panic("Texture didn't load properly\n");
     GLuint textureID = glGetUniformLocation(program, "myTextureSampler");
 
@@ -55,7 +55,7 @@ int main() {
     std::vector<glm::vec3> vertices;
     std::vector<glm::vec2> uvs;
     std::vector<glm::vec3> normals; // Won't be used at the moment.
-    bool res = loadOBJ("Models/cube.obj", vertices, uvs, normals);
+    bool res = loadOBJ("../res/models/cube.obj", vertices, uvs, normals);
     if (!res) {
         return 1;
     }
