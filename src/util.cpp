@@ -7,7 +7,6 @@
 namespace Util {
     void panic(const char *message) {
         fprintf(stderr, "%s", message);
-        glfwTerminate();
         exit(-1);
     }
 }

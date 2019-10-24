@@ -1,8 +1,5 @@
-#ifndef UTIL_H
-#define UTIL_H
+#pragma once
 
 namespace Util {
     void panic(const char *message);
 }
-
-#endif
