@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "texture.hpp"
+#include "Texture.hpp"
 #include "util.hpp"
 
-GLuint loadBMP(const char *imagePath) {
+std::unique_ptr<Texture> fromFile(const char *imagePath) {
 
     // Data read from the header of the BMP file
     unsigned char header[54];
@@ -87,6 +86,6 @@ GLuint loadBMP(const char *imagePath) {
     // ... which requires mipmaps. Generate them automatically.
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    // Return the ID of the texture we just created
-    return textureID;
+    if (!textureID) Util::panic("Texture didn't load correctly");
+    return std::make_shared<Texture>(textureID);
 }

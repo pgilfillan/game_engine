@@ -1,6 +1,13 @@
-#ifndef TEXTURE_HPP
-#define TEXTURE_HPP
+#pragma once
 
-GLuint loadBMP(const char *imagePath);
+#include <memory>
+#include <GL/glew.h>
 
-#endif
+class Texture {
+public:
+    Texture(GLuint id): id_(id) {}
+    static std::unique_ptr<Texture> fromFile(const char* imagePath);
+    const GLuint id() const;
+private:
+    GLuint id_;
+};

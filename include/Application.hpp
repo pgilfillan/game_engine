@@ -19,5 +19,5 @@ private:
     int glfwSetUp();
     int glewSetUp();
     GLFWwindow* window;
-    Scene s;
+    std::unique_ptr<Scene> s;
 };

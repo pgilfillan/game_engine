@@ -8,14 +8,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "shaders.hpp"
-#include "texture.hpp"
+#include "Texture.hpp"
 #include "util.hpp"
 #include "ModelLoading.hpp"
 #include "Camera.hpp"
 #include "Application.hpp"
-
-int glfwSetUp();
-int glewSetUp();
 
 int main() {
     Application a;
@@ -43,9 +40,8 @@ int main() {
     glm::mat4 MVP        = Projection * View * Model;
 
     //Load textures
-    GLuint firstTex = loadBMP("../res/textures/uvtemplate.bmp");
-    if (!firstTex) Util::panic("Texture didn't load properly\n");
     GLuint textureID = glGetUniformLocation(program, "myTextureSampler");
+    auto firstTex = Texture::fromFile("../res/textures/uvtemplate.bmp");
 
     //Load models
     std::vector<glm::vec3> vertices;
@@ -81,7 +77,7 @@ int main() {
         glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, firstTex);
+        glBindTexture(GL_TEXTURE_2D, firstTex->id());
         glUniform1i(textureID, 0);
 
         glEnableVertexAttribArray(0);
@@ -120,8 +116,13 @@ int main() {
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &uvbuffer);
     glDeleteProgram(program);
-    glDeleteTextures(1, &firstTex);
+    glDeleteTextures(1, &firstTex->id());
     glDeleteVertexArrays(1, &vao);
 
     return 0;
 }
+
+// Transform t(0,0,0,0,0,0,0,0);
+// Mesh m = Mesh::fromFile("file.obj")
+// Texture t = Texture::fromFile("tex.png")
+// 
