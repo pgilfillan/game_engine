@@ -14,9 +14,12 @@ public:
             std::unique_ptr<RenderComponent> renderComponent = std::unique_ptr<RenderComponent>()): 
         renderComponent_(std::move(renderComponent)), transform_(std::move(transform)) {}
 
+    void init();
+    void initRecursive();
     void setParent(std::shared_ptr<Object> newParent) {parent_ = newParent;}
     void setTransform(std::unique_ptr<Transform> newTransform) {transform_ = std::move(newTransform);}
     void render();
+    const std::vector<std::weak_ptr<Object>> getChildren();
 
 private:
     std::unique_ptr<RenderComponent> renderComponent_;

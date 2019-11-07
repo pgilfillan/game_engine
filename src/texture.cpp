@@ -87,5 +87,5 @@ std::unique_ptr<Texture> fromFile(const char *imagePath) {
     glGenerateMipmap(GL_TEXTURE_2D);
 
     if (!textureID) Util::panic("Texture didn't load correctly");
-    return std::make_shared<Texture>(textureID);
+    return std::make_unique<Texture>(textureID);
 }

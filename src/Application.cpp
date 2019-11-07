@@ -13,6 +13,10 @@ Application::Application() {
 
     successCode = glewSetUp();
     if (successCode) Util::panic("GLEW failed to initialise");
+
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 }
 
 Application::~Application() {
@@ -33,14 +37,14 @@ int Application::glfwSetUp() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow( 1024, 768, "First", NULL, NULL);
-    if (!window) {
+    window_ = glfwCreateWindow( 1024, 768, "First", NULL, NULL);
+    if (!window_) {
         fprintf(stderr, "Failed to create window\n");
         getchar();
         glfwTerminate();
         return -1;
     }
-    glfwMakeContextCurrent(window);
+    glfwMakeContextCurrent(window_);
     return 0;
 }
 
@@ -54,4 +58,26 @@ int Application::glewSetUp() {
         return 0;
     }
     
+}
+
+void Application::start() {
+    if (scenes_.size() == 0) {
+        panic("Cannot start the application with no given scenes");
+        return;
+    }
+
+    if (!currScene_) {
+        currScene_ = scenes_[0];
+    }
+    currScene_.load();
+
+    while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window)) {
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        currScene_.render();
+
+        glfwSwapBuffers(window_);
+        glfwPollEvents();
+    }
 }
