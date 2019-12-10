@@ -11,6 +11,7 @@ public:
     Scene(std::string& name): name_(name) {}
     void load();
     void render();
+    void update();
 
 private:
     std::string name_;

@@ -15,7 +15,7 @@ public:
     void addScene(Scene s);
     void setCurrentScene(std::string& sceneName);
 
-    GLFWwindow* const getWindow() const {return window;}
+    GLFWwindow* const getWindow() const {return window_;}
 
 private:
     int glfwSetUp();

@@ -1,9 +1,13 @@
 #include "Scene.hpp"
 
 void Scene::load() {
-    root_.initRecursive();    
+    root_->initRecursive();    
 }
 
-void Sceme::render() {
-    root_.render();
+void Scene::render() {
+    root_->render();
+}
+
+void Scene::update() {
+    root_->updateRecursive();
 }

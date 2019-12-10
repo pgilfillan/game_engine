@@ -1,9 +1,10 @@
 #pragma once
 
+#include <GL/glew.h>
 #include <memory>
 #include <utility>
 
-class Mesh;
+struct Mesh;
 class Texture;
 class Shader;
 class Material;
@@ -25,4 +26,8 @@ private:
     std::unique_ptr<Shader> shader_;
     std::unique_ptr<Material> material_;
 
+    GLuint vertexBuffer_;
+    GLuint uvBuffer_;
+    //GLuint normalsBuffer_;
+    GLuint vao_;
 };

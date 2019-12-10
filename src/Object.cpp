@@ -13,19 +13,30 @@ void Object::render() {
     }
 
     for (auto& child : children_) {
-        if (auto c = child.lock()) {
-            c->render();
-        }
+        child->render();
+    }
+}
+
+void Object::update() {
+
+}
+
+void Object::updateRecursive() {
+    update();
+    for (auto& child : children_) {
+        child->updateRecursive();
     }
 }
 
 void Object::init() {
-
+    if (renderComponent_) {
+        renderComponent_->init();
+    }
 }
 
 void Object::initRecursive() {
     init();
     for (auto& child : children_) {
-        child.initRecursive();
+        child->initRecursive();
     }
 }

@@ -62,20 +62,21 @@ int Application::glewSetUp() {
 
 void Application::start() {
     if (scenes_.size() == 0) {
-        panic("Cannot start the application with no given scenes");
+        Util::panic("Cannot start the application with no given scenes");
         return;
     }
 
     if (!currScene_) {
         currScene_ = scenes_[0];
     }
-    currScene_.load();
+    currScene_->load();
 
-    while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window)) {
+    while (glfwGetKey(window_, GLFW_KEY_ESCAPE) != GLFW_PRESS && !glfwWindowShouldClose(window_)) {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        currScene_.render();
+        currScene_->render();
+        currScene_->update();
 
         glfwSwapBuffers(window_);
         glfwPollEvents();

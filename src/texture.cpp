@@ -1,8 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <GLFW/glfw3.h>
-
 #include "Texture.hpp"
 #include "util.hpp"
 
@@ -87,5 +84,9 @@ std::unique_ptr<Texture> fromFile(const char *imagePath) {
     glGenerateMipmap(GL_TEXTURE_2D);
 
     if (!textureID) Util::panic("Texture didn't load correctly");
-    return std::make_unique<Texture>(textureID);
+    return std::unique_ptr<Texture>(new Texture(textureID));
+}
+
+Texture::~Texture() {
+    glDeleteTextures(1, &id_);
 }

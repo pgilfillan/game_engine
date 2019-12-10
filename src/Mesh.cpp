@@ -8,7 +8,7 @@
 #include "Mesh.hpp"
 
 std::unique_ptr<Mesh> Mesh::from_OBJ(const char * path) {
-    auto newMesh = std::make_unique<Mesh>();
+    std::unique_ptr<Mesh> newMesh(new Mesh());
 
     printf("Loading OBJ file %s...\n", path);
 
@@ -88,12 +88,12 @@ std::unique_ptr<Mesh> Mesh::from_OBJ(const char * path) {
         glm::vec3 normal = temp_normals[ normalIndex-1 ];
         
         // Put the attributes in buffers
-        newMesh->vertices_.push_back(vertex);
-        newMesh->uvs_.push_back(uv);
-        newMesh->normals_.push_back(normal);
+        newMesh->vertices.push_back(vertex);
+        newMesh->uvs.push_back(uv);
+        newMesh->normals.push_back(normal);
     
     }
     fclose(file);
 
-    return true;
+    return newMesh;
 }

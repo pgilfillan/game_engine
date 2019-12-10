@@ -116,13 +116,7 @@ int main() {
     glDeleteBuffers(1, &vertexbuffer);
     glDeleteBuffers(1, &uvbuffer);
     glDeleteProgram(program);
-    glDeleteTextures(1, &firstTex->id());
     glDeleteVertexArrays(1, &vao);
 
     return 0;
 }
-
-// Transform t(0,0,0,0,0,0,0,0);
-// Mesh m = Mesh::fromFile("file.obj")
-// Texture t = Texture::fromFile("tex.png")
-// 

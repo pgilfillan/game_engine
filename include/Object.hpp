@@ -19,11 +19,13 @@ public:
     void setParent(std::shared_ptr<Object> newParent) {parent_ = newParent;}
     void setTransform(std::unique_ptr<Transform> newTransform) {transform_ = std::move(newTransform);}
     void render();
+    virtual void update();
+    void updateRecursive();
     const std::vector<std::weak_ptr<Object>> getChildren();
 
 private:
     std::unique_ptr<RenderComponent> renderComponent_;
     std::unique_ptr<Transform> transform_;
     std::weak_ptr<Object> parent_;
-    std::vector<std::weak_ptr<Object>> children_;
+    std::vector<std::shared_ptr<Object>> children_;
 };
