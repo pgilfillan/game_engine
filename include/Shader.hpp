@@ -11,6 +11,6 @@ public:
     static std::shared_ptr<Shader> fromFiles(const char* vsName, const char* fsName);
     void use();
 
-private:
+//private: TODO: hide programId_
     GLuint programId_;
 };

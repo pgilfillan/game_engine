@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "shaders.hpp"
+#include "Shader.hpp"
 #include "Texture.hpp"
 #include "util.hpp"
 #include "ModelLoading.hpp"
@@ -27,7 +27,8 @@ int main() {
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
     //Set up shaders
-    GLuint program = loadShaders("../res/shaders/simpleVShader.vs", "../res/shaders/simpleFShader.fs");
+    auto shader = Shader::fromFiles("../res/shaders/simpleVShader.vs", "../res/shaders/simpleFShader.fs");
+    auto program = shader->programId_; // TODO: hide programId_
 
     //Initialise camera
     Camera cam = Camera(glm::vec3(7,5,3), glm::vec3(0,0,0), glm::vec3(0,1,0));

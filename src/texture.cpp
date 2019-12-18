@@ -3,7 +3,7 @@
 #include "Texture.hpp"
 #include "util.hpp"
 
-std::unique_ptr<Texture> fromFile(const char *imagePath) {
+std::unique_ptr<Texture> Texture::fromFile(const char *imagePath) {
 
     // Data read from the header of the BMP file
     unsigned char header[54];
