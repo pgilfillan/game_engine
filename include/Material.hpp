@@ -23,6 +23,13 @@ public:
         }
     }
 
+    template <typename ValueType> 
+    void setMatrixValue(const std::string& key, const ValueType& newValue, const Shader::UniformType& type) {
+        if (shader_) {
+            shader_->setMatrixValue<ValueType>(key, newValue, type);
+        }
+    }
+
 private:
     std::shared_ptr<Shader> shader_;
     std::unique_ptr<Texture> diffuseTexture_;

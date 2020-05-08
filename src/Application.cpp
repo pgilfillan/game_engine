@@ -37,7 +37,7 @@ int Application::glfwSetUp() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // To make MacOS happy; should not be needed
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window_ = glfwCreateWindow( 1024, 768, "First", NULL, NULL);
+    window_ = glfwCreateWindow(1024, 768, "First", NULL, NULL);
     if (!window_) {
         fprintf(stderr, "Failed to create window\n");
         getchar();
@@ -45,6 +45,7 @@ int Application::glfwSetUp() {
         return -1;
     }
     glfwMakeContextCurrent(window_);
+    glfwSetInputMode(window_, GLFW_STICKY_KEYS, GL_TRUE);
     return 0;
 }
 
@@ -57,7 +58,6 @@ int Application::glewSetUp() {
     } else {
         return 0;
     }
-    
 }
 
 void Application::start() {

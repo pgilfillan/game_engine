@@ -16,13 +16,14 @@ Object::~Object() {
 void Object::render(const glm::mat4& projectionViewMatrix) {
     // Render this object
     if (mesh_) {
+        material_->use();
+
         // TODO: rotation as well
         auto modelMatrix = glm::scale(glm::translate(glm::mat4(1.0f), transform_->position), transform_->scale);
         glm::mat4 MVP = projectionViewMatrix * modelMatrix;
-        material_->setValue<glm::mat4>("MVP", MVP, Shader::UniformType::Matrix4x4);
-        material_->use();
+        material_->setMatrixValue<glm::mat4>("MVP", MVP, Shader::UniformType::Matrix4x4);
+        
         glBindVertexArray(vao_);
-
         glEnableVertexAttribArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer_);
         glVertexAttribPointer(

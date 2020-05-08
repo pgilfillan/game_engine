@@ -1,6 +1,8 @@
 #include "Scene.hpp"
 #include "Camera.hpp"
 
+Scene::Scene(const std::string& name): name_(name), root_(new Object()) {}
+
 void Scene::setCamera(const std::shared_ptr<Camera>& newCamera) {
     camera_ = newCamera;
 }

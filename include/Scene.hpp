@@ -9,7 +9,7 @@ class Camera;
 class Scene {
 
 public:
-    Scene(const std::string& name): name_(name) {}
+    Scene(const std::string& name);
     void setCamera(const std::shared_ptr<Camera>& newCamera);
     void load();
     void render();

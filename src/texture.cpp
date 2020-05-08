@@ -3,6 +3,8 @@
 #include "Texture.hpp"
 #include "util.hpp"
 
+#include <iostream>
+
 std::unique_ptr<Texture> Texture::fromFile(const char *imagePath) {
 
     // Data read from the header of the BMP file
@@ -74,7 +76,7 @@ std::unique_ptr<Texture> Texture::fromFile(const char *imagePath) {
     // Poor filtering, or ...
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     //glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
-
+    
     // ... nice trilinear filtering ...
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -89,4 +91,9 @@ std::unique_ptr<Texture> Texture::fromFile(const char *imagePath) {
 
 Texture::~Texture() {
     glDeleteTextures(1, &id_);
+}
+
+void Texture::use() {
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, id_);
 }
