@@ -13,6 +13,10 @@
 #include "ModelLoading.hpp"
 #include "Camera.hpp"
 #include "Application.hpp"
+#include "Object.hpp"
+#include "Transform.hpp"
+#include "Mesh.hpp"
+#include "Material.hpp"
 
 int main() {
     Application a;
@@ -31,7 +35,7 @@ int main() {
     auto program = shader->programId_; // TODO: hide programId_
 
     //Initialise camera
-    Camera cam = Camera(glm::vec3(7,5,3), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    Camera cam;
 
     //Initialise MVP matrix
     GLuint matrixID = glGetUniformLocation(program, "MVP");
@@ -118,6 +122,32 @@ int main() {
     glDeleteBuffers(1, &uvbuffer);
     glDeleteProgram(program);
     glDeleteVertexArrays(1, &vao);
+
+    return 0;
+}
+
+int othermain() {
+    // Cube transform
+    std::unique_ptr<Transform> cubeTransform(new Transform(0, 0, 0, 0, 0, 0, 1, 1, 1));
+
+    // Cube render information
+    auto cubeMesh = Mesh::from_OBJ("../res/models/cube.obj");
+    auto cubeTexture = Texture::fromFile("../res/textures/uvtemplate.bmp");
+    auto cubeShader = Shader::fromFiles("../res/shaders/simpleVShader.vs", "../res/shaders/simpleFShader.fs");
+    std::unique_ptr<Material> cubeMaterial(new Material(cubeShader, std::move(cubeTexture)));
+    
+    // Create cube object
+    std::shared_ptr<Object> cubeObject(new Object(std::move(cubeTransform), std::move(cubeMesh), std::move(cubeMaterial)));
+
+    // Create scene containing cube
+    std::shared_ptr<Scene> mainScene(new Scene(std::string("Main scene")));
+    mainScene->getRoot()->addChild(cubeObject);
+
+    // Set application to use this scene, then start
+    Application app;
+    app.addScene(mainScene);
+    app.setCurrentScene("Main scene");
+    app.start();
 
     return 0;
 }

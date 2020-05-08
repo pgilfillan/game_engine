@@ -18,6 +18,6 @@ struct Transform
         scale(glm::vec3(scale1, scale2, scale3)) {}
 
     glm::vec3 position;
-    glm::vec3 rotation;
+    glm::vec3 rotation; // TODO: proper rotation
     glm::vec3 scale;
 };

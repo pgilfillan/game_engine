@@ -82,3 +82,17 @@ void Application::start() {
         glfwPollEvents();
     }
 }
+
+void Application::addScene(std::shared_ptr<Scene> s)
+{
+    scenes_.emplace(s->name(), s);
+}
+
+void Application::setCurrentScene(const std::string& sceneName)
+{
+    auto newCurrScene = scenes_.find(sceneName);
+    if (newCurrScene != scenes_.end())
+    {
+        currScene_ = newCurrScene->second;
+    }
+}
