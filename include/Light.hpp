@@ -7,6 +7,10 @@ class Light {
 public:
     virtual ~Light() = 0;
 
+    const glm::vec4& getPos() const;
+    const glm::vec3& getIntensity() const;
+    const glm::vec3& getAmbient() const;
+
 protected:
     Light(const glm::vec4& pos, const glm::vec3 intensity, const glm::vec3 ambient);
     glm::vec4 pos_;

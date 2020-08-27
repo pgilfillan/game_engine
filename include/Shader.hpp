@@ -9,7 +9,10 @@ class Shader {
 public:
     enum UniformType {
         Matrix4x4,
-        Integer1
+        Integer1,
+        Float1,
+        Float3,
+        Float4
     };
 
     Shader(GLuint programId): programId_(programId) {}
@@ -30,6 +33,21 @@ public:
     }
 
     template <typename ValueType>
+    void setVectorValue(const std::string& key, const ValueType& newValue, const UniformType& type) {
+        GLuint uniformLocation = glGetUniformLocation(programId_, key.c_str());
+        switch (type) {
+        case Float3:
+            glUniform3fv(uniformLocation, 1, &newValue[0]);
+            break;
+        case Float4:
+            glUniform4fv(uniformLocation, 1, &newValue[0]);
+            break;
+        default:
+            break;
+        }
+    }
+
+    template <typename ValueType>
     void setMatrixValue(const std::string& key, const ValueType& newValue, const UniformType& type) {
         GLuint uniformLocation = glGetUniformLocation(programId_, key.c_str());
         switch (type) {
@@ -41,6 +59,6 @@ public:
         }
     }
 
-//private: TODO: hide programId_
+private:
     GLuint programId_;
 };

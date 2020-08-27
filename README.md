@@ -6,3 +6,13 @@ in particular learning more about rendering techniques, engine architecture and 
 systems with many components. I'm not expecting to develop a meaningful game with it.
 
 Barely anything apart from a basic rendering skeleton done yet.
+
+## Building
+
+* git clone --recurse-submodules https://github.com/pgilfillan/game_engine.git
+* mkdir game_engine/build
+* cd game_engine/build
+* cmake ..
+* cmake --build .
+
+Then run `build/Debug/main.exe`

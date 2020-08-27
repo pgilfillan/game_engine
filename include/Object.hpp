@@ -8,6 +8,8 @@
 #include "Mesh.hpp"
 #include "Material.hpp"
 
+class Light;
+
 class Object {
 
 public:
@@ -23,7 +25,7 @@ public:
     void setTransform(std::unique_ptr<Transform> newTransform) {transform_ = std::move(newTransform);}
     void setMesh(std::unique_ptr<Mesh> newMesh) {mesh_ = std::move(newMesh);}
     void setMaterial(std::unique_ptr<Material> newMaterial) {material_ = std::move(newMaterial);}
-    void render(const glm::mat4& projectionViewMatrix);
+    void render(const glm::mat4& view, const glm::mat4& projectionViewMatrix, const Light& light);
     virtual void update();
     void updateRecursive();
     const std::vector<std::weak_ptr<Object>> getChildren();
@@ -36,7 +38,7 @@ private:
     GLuint vao_;
     GLuint vertexBuffer_;
     GLuint uvBuffer_;
-    //GLuint normalsBuffer_;
+    GLuint normalsBuffer_;
 
     // Transform
     std::unique_ptr<Transform> transform_;

@@ -24,6 +24,13 @@ public:
     }
 
     template <typename ValueType> 
+    void setVectorValue(const std::string& key, const ValueType& newValue, const Shader::UniformType& type) {
+        if (shader_) {
+            shader_->setVectorValue<ValueType>(key, newValue, type);
+        }
+    }
+
+    template <typename ValueType> 
     void setMatrixValue(const std::string& key, const ValueType& newValue, const Shader::UniformType& type) {
         if (shader_) {
             shader_->setMatrixValue<ValueType>(key, newValue, type);
