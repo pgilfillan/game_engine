@@ -1,10 +1,4 @@
-/*
-Abstract camera object, similar usage to glm::lookAt
-Written by Patrick Gilfillan
-*/
-
-#ifndef CAMERA_H
-#define CAMERA_H
+#pragma once
 
 class Camera {
 
@@ -36,5 +30,3 @@ private:
     glm::mat4 projection_;
     glm::mat4 view_;
 };
-
-#endif

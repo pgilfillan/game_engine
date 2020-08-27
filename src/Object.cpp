@@ -20,8 +20,8 @@ void Object::render(const glm::mat4& projectionViewMatrix) {
 
         // TODO: rotation as well
         auto modelMatrix = glm::scale(glm::translate(glm::mat4(1.0f), transform_->position), transform_->scale);
-        glm::mat4 MVP = projectionViewMatrix * modelMatrix;
-        material_->setMatrixValue<glm::mat4>("MVP", MVP, Shader::UniformType::Matrix4x4);
+        glm::mat4 PVM = projectionViewMatrix * modelMatrix;
+        material_->setMatrixValue<glm::mat4>("PVM", PVM, Shader::UniformType::Matrix4x4);
         
         glBindVertexArray(vao_);
         glEnableVertexAttribArray(0);

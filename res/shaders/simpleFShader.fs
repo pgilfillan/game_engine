@@ -7,7 +7,5 @@ out vec3 colour;
 uniform sampler2D textureSampler;
 
 void main(void) {
-
-    colour = texture( textureSampler, UV ).rgb;
-
+    colour = texture(textureSampler, UV).rgb;
 }
